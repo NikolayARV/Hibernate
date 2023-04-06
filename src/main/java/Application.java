@@ -1,9 +1,7 @@
 import model.Employee;
+import service.EmployeeDaoImpl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
 
 public class Application {
@@ -13,13 +11,14 @@ public class Application {
 
         entityManager.getTransaction().begin();
 
-        String jpqlQuery = "SELECT e FROM Employee e WHERE e.age> :minAge";
+        String jpqlQuery = "SELECT e FROM Employee e WHERE e.id= :minAge";
         TypedQuery<Employee> query = entityManager.createQuery(jpqlQuery, Employee.class);
-        query.setParameter("minAge", 30);
+        query.setParameter("minAge", 9);
         List<Employee> employees = query.getResultList();
         System.out.println(employees);
 
         entityManager.getTransaction().commit();
+
 
 
         entityManager.close();
