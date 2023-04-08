@@ -2,10 +2,8 @@ import model.City;
 import model.Employee;
 import service.CityDao;
 import service.CityDaoImpl;
+import service.EmployeeDao;
 import service.EmployeeDaoImpl;
-
-import javax.persistence.*;
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -27,11 +25,18 @@ public class Application {
         //        entityManager.close();
         //        entityManagerFactory.close();
 
-        EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
+        EmployeeDao employeeDao = new EmployeeDaoImpl();
         CityDao cityDao = new CityDaoImpl();
 
-        System.out.println(cityDao.getById(2));
+        City forest = new City(5, "FunForest");
+        cityDao.add(forest);
+        Employee forst = new Employee(2, "Vlad", "Vladov", "m", 27, forest);
+        employeeDao.add(forst);
+        employeeDao.getById(3);
 
-        }
+        employeeDao.getAllEmployee();
+
 
     }
+
+}

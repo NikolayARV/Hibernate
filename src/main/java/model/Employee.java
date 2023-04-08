@@ -25,9 +25,8 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private int age;
-    //@Column(name = "city_id")
-    //    private int city;
-    @ManyToOne
+
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
 }
