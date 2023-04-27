@@ -1,29 +1,42 @@
+import model.City;
 import model.Employee;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-import java.util.List;
+import service.CityDao;
+import service.CityDaoImpl;
+import service.EmployeeDao;
+import service.EmployeeDaoImpl;
 
 public class Application {
     public static void main(String[] args) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        //EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
+        //        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        //
+        //        entityManager.getTransaction().begin();
+        //
+        //        String jpqlQuery = "SELECT e FROM Employee e WHERE e.id= :minAge";
+        //        TypedQuery<Employee> query = entityManager.createQuery(jpqlQuery, Employee.class);
+        //        query.setParameter("minAge", 8);
+        //        List<Employee> employees = query.getResultList();
+        //        System.out.println(employees);
+        //
+        //        entityManager.getTransaction().commit();
+        //
+        //
+        //
+        //        entityManager.close();
+        //        entityManagerFactory.close();
 
-        entityManager.getTransaction().begin();
+        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        CityDao cityDao = new CityDaoImpl();
 
-        String jpqlQuery = "SELECT e FROM Employee e WHERE e.age> :minAge";
-        TypedQuery<Employee> query = entityManager.createQuery(jpqlQuery, Employee.class);
-        query.setParameter("minAge", 30);
-        List<Employee> employees = query.getResultList();
-        System.out.println(employees);
+        City forest = new City(5, "FunForest");
+        cityDao.add(forest);
+        Employee forst = new Employee(2, "Vlad", "Vladov", "m", 27, forest);
+        employeeDao.add(forst);
+        employeeDao.getById(3);
 
-        entityManager.getTransaction().commit();
+        employeeDao.getAllEmployee();
 
-
-        entityManager.close();
-        entityManagerFactory.close();
 
     }
+
 }
